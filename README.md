@@ -12,15 +12,15 @@ This repository contains scripts for infrastructure creation and kubernetes clus
 
 ### Requirements
 
-* docker
-* terraform (v0.11.11) (if not using docker)
+* docker (running terraform v0.11.11)
 
 ### Credentials
 
 Create an OVH Application access and secret key [here](https://eu.api.ovh.com/createApp/), then request an authentication token from OVH using the following request:
 
 ```bash
-curl -XPOST -H "X-Ovh-Application: <application-token>" -H "Content-type: application/json" https://eu.api.ovh.com/1.0/auth/credential -d '{
+$ curl -XPOST -H "X-Ovh-Application: <application-token>" -H "Content-type: application/json" \
+https://eu.api.ovh.com/1.0/auth/credential -d '{
   "accessRules": [
     {
       "method": "DELETE",
@@ -53,7 +53,7 @@ This registers the application token to your account with the corresponding acce
 
 ### Usage
 
-Simply execute from the `ovh` directory the `apply.sh` script.
+Simply execute the `apply.sh` script from the `ovh` directory.
 
 ```bash
 $ cd ovh 
