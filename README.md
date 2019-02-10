@@ -4,11 +4,46 @@ This repository contains scripts for infrastructure creation and kubernetes clus
 
 ## What's in there ?
 
-* **online:** Server installation on Online.net
+* **server:** Server installation on Online.net
 * **kubernetes:** Kubernetes cluster management using RKE
-* **ovh:** OVH DNS zone management with Terraform
+* **dns:** OVH DNS zone management with Terraform
 
-## OVH - Terraform
+## Server - Online.net
+
+### Pre-requisites
+
+#### Credentials
+
+Get your private token on the Online.net console, available [here](https://console.online.net/fr/api/access) to use the API with this script.
+
+#### Partitioning template
+
+You'll also need to create a linux partitioning template on the console, [here](https://console.online.net/fr/template/partition). Keep the ID, we'll also need it.
+
+### Usage
+
+#### Installation
+
+Simply execute the `scripts/install-server.sh` script with the following arguments:
+
+```bash
+$ ./install-server.sh <server-id> <online-token> <partitioning-template>
+```
+
+This will launch the installation of CoreOS - Alpha on the <server-id> machine, with a password randomly generated for the user `bootstrap`.
+
+The password will be printed for the next step: configuring access to the machine, once the installation is over (may take up to an hour).
+
+#### SSH keys
+
+The installation on Online.net does not correctly install SSH keys
+
+Install a server on Online.net, and outputs
+
+## Kubernetes - RKE
+
+
+## DNS - Terraform
 
 ### Requirements
 
@@ -53,7 +88,7 @@ This registers the application token to your account with the corresponding acce
 
 ### Usage
 
-Simply execute the `apply.sh` script from the `ovh` directory.
+Simply execute the `apply.sh` script from the `dns` directory.
 
 ```bash
 $ cd ovh 
@@ -80,6 +115,6 @@ Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 
 The script will execute terraform using docker, and will run the `init` and `apply` commands.
 
-## Authors
+## Author
 
 * **Clément Thuault** - [thuaultc](https://github.com/thuaultc)
