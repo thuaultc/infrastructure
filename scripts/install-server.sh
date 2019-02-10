@@ -28,4 +28,4 @@ cd $DIRECTORY_PATH
 echo "Building docker image..."
 docker build -t $DOCKER_TAG . > /dev/null 2> /dev/null
 echo "Launching image..."
-docker run -e ONLINE_TOKEN=$ONLINE_TOKEN --rm $DOCKER_TAG $SERVER_ID $PARTITIONING_TEMPLATE
+docker run --rm -e ONLINE_TOKEN=$ONLINE_TOKEN $DOCKER_TAG $SERVER_ID $PARTITIONING_TEMPLATE
