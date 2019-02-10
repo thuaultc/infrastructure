@@ -14,7 +14,8 @@ if [ $# -lt 3 ]; then
 fi
 
 SCRIPT_PATH="$(cd "$(dirname "$0")"; pwd -P)"
-DIRECTORY_PATH="$SCRIPT_PATH/../server"
+
+DIRECTORY_PATH="$SCRIPT_PATH/../server/install"
 DOCKER_TAG="infrastructure/install-server"
 
 # Arguments
