@@ -18,7 +18,7 @@ SCRIPT_PATH="$(cd "$(dirname "$0")"; pwd -P)"
 DIRECTORY_PATH="$SCRIPT_PATH/../kubernetes/cluster"
 DOCKER_TAG="infrastructure/kubernetes-cluster"
 
-KUBERNETES_OUTPUT_PATH="$DIRECTORY_PATH/../output"
+KUBERNETES_CONFIG_PATH="$DIRECTORY_PATH/../config"
 
 # Arguments
 CLUSTER_NAME=$1
@@ -30,4 +30,4 @@ cd $DIRECTORY_PATH
 echo "Building docker image..."
 docker build --build-arg UID=`id -u` --build-arg GID=`id -g` -t $DOCKER_TAG . > /dev/null 2> /dev/null
 echo "Launching image..."
-docker run --rm -v $KUBERNETES_OUTPUT_PATH:/output:rw -e ONLINE_TOKEN=$ONLINE_TOKEN -it $DOCKER_TAG remove $CLUSTER_NAME $SERVER_ID
+docker run --rm -v $KUBERNETES_CONFIG_PATH:/config:rw -e ONLINE_TOKEN=$ONLINE_TOKEN -it $DOCKER_TAG remove $CLUSTER_NAME $SERVER_ID
