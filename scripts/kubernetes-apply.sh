@@ -26,6 +26,6 @@ CLUSTER_NAME=$1
 # Main
 cd $DIRECTORY_PATH
 echo "Building docker image..."
-docker build --build-arg UID=`id -u` --build-arg GID=`id -g` -t $DOCKER_TAG .
+docker build --build-arg UID=`id -u` --build-arg GID=`id -g` -t $DOCKER_TAG . > /dev/null 2> /dev/null
 echo "Launching image..."
 docker run --rm -v $HOME/.ssh:/home/user/.ssh:ro -v $KUBERNETES_CONFIG_PATH:/config:rw -it $DOCKER_TAG up --config /config/${CLUSTER_NAME}_cluster.yml
