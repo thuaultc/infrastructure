@@ -5,9 +5,6 @@ terraform {
 provider "ovh" {
   version            = "~> 0.3"
   endpoint           = "ovh-eu"
-  application_key    = "udKnoJbZr4ajq7eS"
-  application_secret = "BhRDnOIlYRQJMUtnJE5BN18y6Q4oAM9g"
-  consumer_key       = "L8GQVYlq1ps3UpOOGDhK6e5eM9OmEyxq"
 }
 
 module "ovh-a-record_thuault" {
