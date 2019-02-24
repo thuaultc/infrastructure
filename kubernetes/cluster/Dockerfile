@@ -5,7 +5,7 @@ ARG GID
 
 ENV PYTHONUNBUFFERED 1
 ENV RKE_CLUSTER_BASE_CONFIG_PATH /app/cluster-base.yml
-ENV RKE_OUTPUT_CONFIG_PATH /output
+ENV RKE_OUTPUT_CONFIG_PATH /config
 
 RUN addgroup -g ${GID} user && \
     adduser -D -u ${UID} -G user user && \
