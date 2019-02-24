@@ -51,11 +51,14 @@ if __name__ == '__main__':
         rpn_group_id = online_api.check_rpn_group_exists(cluster_name)
         if not rpn_group_id:
             print('unexpected error: could not find RPN group', file=sys.stderr)
+            sys.exit(1)
 
     if action != 'generate':
         rpn_group = online_api.get_rpn_group(rpn_group_id)
         if not rpn_group:
             print('unexpected error: could not get RPN group data', file=sys.stderr)
+            sys.exit(1)
 
     rke_config = rke.Config()
-    rke_config.generate(cluster_name, rpn_group)
+    if not rke_config.generate(cluster_name, rpn_group):
+        sys.exit(1)

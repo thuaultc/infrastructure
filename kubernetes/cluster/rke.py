@@ -42,7 +42,6 @@ class Config(object):
             })
 
         output_config_path = os.path.join(self.__output_config_directory_path, f'{cluster_name}_cluster.yml')
-        print(output_config_path)
         with open(output_config_path, 'w') as file_handler:
             try:
                 yaml.dump(cluster_config, file_handler, default_flow_style=False)
@@ -50,3 +49,5 @@ class Config(object):
                 print(f'error: Could not create YAML file {output_config_path}', file=sys.stderr)
                 print(f'output: {e}', file=sys.stderr)
                 return False
+
+        print(f'Config generated in {output_config_path}')
