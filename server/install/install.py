@@ -15,7 +15,7 @@ def generate_password(password_length):
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
-        print(f"usage: {sys.argv[0]} <server-id> <partitioning-template>", file=sys.stderr)
+        print(f'usage: {sys.argv[0]} <server-id> <partitioning-template>', file=sys.stderr)
         sys.exit(1)
 
     server_id, partitioning_template = sys.argv[1:3]
@@ -32,8 +32,8 @@ if __name__ == '__main__':
     if not online_api.install_server(server_id, partitioning_template, random_password):
         sys.exit(1)
 
-    print("\nServer successfully installed! You might have to wait up to 1h to connect to it.\n")
-    print(f"Hostname: k8s-node-{server_id}")
-    print(f"IP Address: {server_ip}")
-    print("Username: bootstrap")
-    print(f"Password: {random_password}")
+    print('\nServer successfully installed! You might have to wait up to 1h to connect to it.\n')
+    print(f'Hostname: k8s-node-{server_id}')
+    print(f'IP Address: {server_ip}')
+    print('Username: bootstrap')
+    print(f'Password: {random_password}')

@@ -1,7 +1,6 @@
 #! /usr/bin/env python3
 # encoding: utf-8
 
-import json
 import os
 import sys
 
@@ -12,11 +11,11 @@ class OnlineAPI(object):
     def __init__(self):
         self.__endpoint = 'https://api.online.net/api/v1'
         self.__token = os.getenv('ONLINE_TOKEN')
-        self.__headers = {'Authorization': 'Bearer {}'.format(self.__token)}
+        self.__headers = {'Authorization': f'Bearer {self.__token}'}
 
     def check_server_exists(self, server_id):
         print(f'Checking that server {server_id} exists...')
-        r = requests.get('{}/server'.format(self.__endpoint), headers=self.__headers)
+        r = requests.get(f'{self.__endpoint}/server', headers=self.__headers)
 
         if r.status_code != 200:
             print(f'error: HTTP status_code {r.status_code} when querying servers (must be 200)', file=sys.stderr)

@@ -6,6 +6,6 @@ WORKDIR /app
 COPY . /app
 
 RUN pip install pipenv \
-  && pipenv install
+  && pipenv install --deploy
 
 ENTRYPOINT ["pipenv", "run", "python", "install.py"]
