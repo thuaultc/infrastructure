@@ -104,7 +104,7 @@ Simply execute the `scripts/kubernetes-cluster-{add,remove}.sh` script with the 
 $ ./scripts/kubernetes-cluster-add.sh <cluster-name> <server-id> <online-token>
 ```
 
-This will add/remove your node to the RPN group named 'kubernetes-cluster-<cluster-name>', and generate the RKE cluster.yml config corresponding to this group. This configuration is then available in a specific config/ directory for later use.
+This will add/remove your node to the RPN group named `kubernetes-cluster-<cluster-name>`, and generate the RKE cluster.yml config corresponding to this group. This configuration is then available in a specific config/ directory for later use.
 
 ```
 Building docker image...
