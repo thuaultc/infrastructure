@@ -52,6 +52,12 @@ EOF
 echo "Trying to use the newly generated key..."
 ssh -o StrictHostKeyChecking=no -o LogLevel=ERROR $SERVER_HOSTNAME <<EOF
 sudo userdel -f bootstrap
+sudo systemctl unmask update-engine.service
+sudo systemctl enable update-engine.service
+sudo systemctl start update-engine.service
+sudo systemctl stop locksmithd.service
+sudo systemctl disable locksmithd.service
+sudo systemctl mask locksmithd.service
 sudo systemctl disable docker.socket
 sudo systemctl stop docker.socket
 sudo systemctl enable docker.service
