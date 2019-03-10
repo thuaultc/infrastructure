@@ -46,3 +46,8 @@ module "ovh-a-record_speed_dial" {
   source    = "modules/ovh-a-record"
   subdomain = "speed-dial"
 }
+
+module "ovh-a-record_ceph" {
+  source    = "modules/ovh-a-record"
+  subdomain = "ceph"
+}
