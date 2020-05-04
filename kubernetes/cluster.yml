@@ -1,0 +1,9 @@
+nodes:
+    - address: 91.121.165.129
+      user: clement
+      role: ["controlplane", "worker", "etcd"]
+      ssh_agent_auth: true
+ingress:
+    provider: none
+network:
+    plugin: calico

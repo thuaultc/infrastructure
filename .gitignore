@@ -1,4 +1,5 @@
 terraform.tfplan
 terraform.tfstate.backup
 .terraform/
-*cluster.yml
+kubernetes/cluster.rkestate
+kubernetes/kube_config_cluster.yml
