@@ -1,0 +1,15 @@
+---
+# playbook: install.yml
+# description: Configures a server and creates users
+#
+- hosts: server
+  connection: local
+  vars_files:
+    - vars.yml
+  vars:
+    - hostname: "{{ inventory_hostname }}"
+    - server_ip: "{{ ansible_default_ipv4.address }}"
+  roles:
+    - setup
+    - users
+

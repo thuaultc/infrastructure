@@ -1,0 +1,61 @@
+---
+# role: kubernetes
+# tasks: main.yml
+# description: Configures a kubernetes RKE cluster
+
+- name: Install tooling
+  block:
+    - name: Check that kubectl is installed
+      stat:
+        path: /usr/local/bin/kubectl
+      register: stat_kubectl
+
+    - name: Install kubectl
+      get_url:
+        url: "https://storage.googleapis.com/kubernetes-release/release/{{ kubernetes.kubectl_version }}/bin/linux/amd64/kubectl"
+        dest: /usr/local/bin/kubectl
+        mode: '0755'
+      when: not stat_kubectl.stat.exists
+
+    - name: Check that helm is installed
+      stat:
+        path: /usr/local/bin/helm
+      register: stat_helm
+
+    - name: Fetch helm install script
+      get_url:
+        url: https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+        dest: /tmp/get-helm
+        mode: '0755'
+      when: not stat_helm.stat.exists
+
+    - name: Install helm
+      command: "/tmp/get-helm --version {{ kubernetes.helm_version }}"
+      when: not stat_helm.stat.exists
+
+    - name: Check that rke is installed
+      stat:
+        path: /usr/local/bin/rke
+      register: stat_rke
+
+    - name: Install rke
+      get_url:
+        url: "https://github.com/rancher/rke/releases/download/{{ kubernetes.rke_version }}/rke_linux-amd64"
+        dest: /usr/local/bin/rke
+        mode: '0755'
+      when: not stat_rke.stat.exists
+  become: yes
+  become_user: root
+
+- name: Create kubeconfig and rke secrets directory
+  file:
+    path: /home/common/secrets
+    state: directory
+    mode:  '0750'
+    owner: common
+    group: users
+
+- name: Template RKE cluster.yml file
+  template:
+    src: templates/cluster.yml.j2
+    dest: /home/common/secrets/cluster.yml

@@ -1,9 +1,9 @@
 nodes:
-    - address: 54.38.80.206
-      user: clement
+    - address: {{ server_ip }}
+      user: common
       role: ["controlplane", "worker", "etcd"]
-      ssh_agent_auth: true
 ingress:
     provider: none
 network:
     plugin: calico
+

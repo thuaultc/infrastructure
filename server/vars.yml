@@ -1,0 +1,27 @@
+server:
+  persistent_data_path: /data
+  packages:
+    - docker.io
+    - net-tools
+    - tree
+    - unzip
+    - zip
+    - zsh
+users:
+  - name: common
+    github: thuaultc
+    shell: /bin/bash
+    uid: 1000
+  - name: clement
+    github: thuaultc
+    shell: /bin/zsh
+    uid: 2000
+  - name: steve
+    github: satreix
+    shell: /bin/zsh
+    uid: 3000
+kubernetes:
+  kubectl_version: v1.18.3
+  helm_version: v3.2.1
+  rke_version: v1.0.8
+

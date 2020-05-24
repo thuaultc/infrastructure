@@ -1,0 +1,37 @@
+---
+# role: user
+# tasks: user.yml
+# description: Creates and configures one user
+
+- name: Create user "{{ user.name }}"
+  user:
+    name: "{{ user.name }}"
+    shell: "{{ user.shell }}"
+    uid: "{{ user.uid }}"
+    groups:
+      - sudo
+      - users
+      - docker
+
+- name: Add user "{{ user.name }}" to sudoers
+  lineinfile:
+    path: "/etc/sudoers.d/{{ user.name }}"
+    line: "{{ user.name }} ALL=(ALL) NOPASSWD: ALL"
+    state: present
+    mode: 0440
+    create: yes
+    validate: 'visudo -cf %s'
+
+- name: Create user persistent data directory
+  file:
+    path: "{{ server.persistent_data_path }}/{{ user.name }}"
+    state: directory
+    mode:  '2775'
+    owner: "{{ user.uid }}"
+    group: users
+
+- name: Set authorized keys taken from github
+  authorized_key:
+    user: "{{ user.name }}"
+    state: present
+    key: "https://github.com/{{ user.github }}.keys"

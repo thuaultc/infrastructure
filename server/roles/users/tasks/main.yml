@@ -1,0 +1,30 @@
+---
+# role: user
+# tasks: main.yml
+# description: Creates and configures users
+
+- name: Check if ubuntu user still exists
+  getent:
+    database: passwd
+    key: ubuntu
+  register: stat_user
+  failed_when: false
+
+- name: Remove the user "ubuntu"
+  user:
+    name: ubuntu
+    state: absent
+    remove: yes
+  when: not stat_user is failed
+
+- name: Remove the group "ubuntu"
+  group:
+    name: ubuntu
+    state: absent
+  when: not stat_user is failed
+
+- name: Create users
+  include: user.yml
+  vars:
+    user: "{{ item }}"
+  with_items: "{{ users }}"

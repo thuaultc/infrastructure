@@ -1,0 +1,52 @@
+---
+# role: setup
+# tasks: main.yml
+# description: Configures and setups a common host
+
+- name: Setting hostname
+  hostname:
+    name: "{{ hostname }}"
+
+- name: Add mappings to /etc/hosts
+  blockinfile:
+    path: /etc/hosts
+    block: |
+      {{ server_ip }} {{ hostname }}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+
+- name: Install some common packages
+  apt:
+    update_cache: yes
+    pkg: "{{ server.packages }}"
+ 
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+
+- name: Enable docker service
+  systemd:
+    name: docker
+    enabled: yes
+
+- name: Remove swapfile from /etc/fstab
+  mount:
+    name: "{{ item }}"
+    fstype: swap
+    state: absent
+  register: swap
+  with_items:
+    - swap
+    - none
+
+- name: Disable swap
+  command: swapoff -a
+  when: swap.changed
+
+- name: Set sysctl configuration
+  sysctl:
+    name: net.ipv4.conf.all.rp_filter
+    value: '0'

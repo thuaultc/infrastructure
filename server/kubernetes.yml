@@ -1,0 +1,14 @@
+---
+# playbook: kubernetes.yml
+# description: Installs k8s tooling and a RKE cluster
+
+- hosts: server
+  connection: local
+  vars_files:
+    - vars.yml
+  vars:
+    - hostname: "{{ inventory_hostname }}"
+    - server_ip: "{{ ansible_default_ipv4.address }}"
+  roles:
+    - kubernetes
+
