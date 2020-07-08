@@ -50,30 +50,3 @@
   sysctl:
     name: net.ipv4.conf.all.rp_filter
     value: '0'
-
-### TO REMOVE AFTER
-
-- name: Create user test
-  user:
-    name: test
-    shell: /bin/bash
-    uid: 4444
-    groups:
-      - sudo
-      - users
-      - docker
-
-- name: Add user test to sudoers
-  lineinfile:
-    path: "/etc/sudoers.d/test"
-    line: "test ALL=(ALL) NOPASSWD: ALL"
-    state: present
-    mode: 0440
-    create: yes
-    validate: 'visudo -cf %s'
-
-- name: Set authorized keys taken from github
-  authorized_key:
-    user: "test"
-    state: present
-    key: "https://github.com/thuaultc.keys"
