@@ -1,7 +1,7 @@
 ---
-# role: user
-# tasks: user.yml
-# description: Creates and configures one user
+# role: kube
+# tasks: kube.yml
+# description: Creates and configures kube user
 
 - name: Create user "{{ user.name }}"
   user:
@@ -30,24 +30,14 @@
     owner: "{{ user.uid }}"
     group: users
 
-- name: Set authorized keys taken from github
-  authorized_key:
-    user: "{{ user.name }}"
-    state: present
-    key: "https://github.com/{{ user.github }}.keys"
+- name: Clone git repositories
+  git:
+    repo: "git@{{ item }}.git"
+    dest: /home/{{ user.name }}
+    version: master
+    key_file: /home/harry/.ssh/id_rsa
+    update: no
+  with_items: "{{ user.repositories }}"
+  become_user: kube
+  become: true
 
-- name: Generate kube SSH key
-  openssh_keypair:
-    path: "~/.ssh/id_rsa_kube"
-    type: rsa
-    size: 4096
-    state: present
-    force: no
-
-- name: Set authorized keys for kube user
-  authorized_key:
-    user: "kube"
-    state: present
-    key: "{{ item }}"
-  with_file:
-    - "/home/{{ user.name }}/.ssh/id_rsa_kube.pub"

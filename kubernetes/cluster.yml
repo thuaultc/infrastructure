@@ -7,3 +7,4 @@ ingress:
     provider: none
 network:
     plugin: calico
+addon_job_timeout: 100

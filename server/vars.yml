@@ -7,19 +7,23 @@ server:
     - unzip
     - zip
     - zsh
-users:
-  - name: common
-    github: thuaultc
+accounts:
+  kube:
+    name: kube
     shell: /bin/bash
     uid: 1000
-  - name: clement
-    github: thuaultc
-    shell: /bin/zsh
-    uid: 2000
-  - name: steve
-    github: satreix
-    shell: /bin/zsh
-    uid: 3000
+    clone:
+      - "github.com:thuaultc/infrastructure"
+      - "github.com:thuaultc/kubernetes"
+  users:
+    - name: clement
+      shell: /bin/zsh
+      uid: 2000
+      github: thuaultc
+    - name: steve
+      shell: /bin/zsh
+      uid: 3000
+      github: satreix
 kubernetes:
   kubectl_version: v1.18.3
   helm_version: v3.2.1

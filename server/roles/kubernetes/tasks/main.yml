@@ -49,13 +49,13 @@
 
 - name: Create kubeconfig and rke secrets directory
   file:
-    path: /home/common/secrets
+    path: /home/kube/secrets
     state: directory
-    mode:  '0750'
-    owner: common
+    mode:  '0770'
+    owner: kube
     group: users
 
 - name: Template RKE cluster.yml file
   template:
     src: templates/cluster.yml.j2
-    dest: /home/common/secrets/cluster.yml
+    dest: /home/kube/secrets/cluster.yml

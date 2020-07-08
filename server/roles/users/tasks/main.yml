@@ -23,8 +23,13 @@
     state: absent
   when: not stat_user is failed
 
+- name: Create kube user
+  include: kube.yml
+  vars:
+    user: "{{ accounts.kube }}"
+
 - name: Create users
   include: user.yml
   vars:
     user: "{{ item }}"
-  with_items: "{{ users }}"
+  with_items: "{{ accounts.users }}"
