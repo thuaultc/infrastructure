@@ -21,6 +21,8 @@
     mode: 0440
     create: yes
     validate: 'visudo -cf %s'
+  become_user: root
+  become: true
 
 - name: Create user persistent data directory
   file:
@@ -35,6 +37,8 @@
     user: "{{ user.name }}"
     state: present
     key: "https://github.com/{{ user.github }}.keys"
+  become_user: root
+  become: true
 
 - name: Generate kube SSH key
   openssh_keypair:
@@ -45,7 +49,6 @@
     force: no
   become_user: "{{ user.name }}"
   become: true
-
 
 - name: Set authorized keys for kube user
   authorized_key:

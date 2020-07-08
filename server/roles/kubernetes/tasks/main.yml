@@ -44,8 +44,8 @@
         dest: /usr/local/bin/rke
         mode: '0755'
       when: not stat_rke.stat.exists
-  become: yes
   become_user: root
+  become: true
 
 - name: Create kubeconfig and rke secrets directory
   file:

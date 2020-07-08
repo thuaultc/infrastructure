@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+DOCKER_API_VERSION=1.40 rke up --config /home/kube/secrets/cluster.yml

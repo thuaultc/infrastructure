@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+sudo su kube <<EOF
+  git -C ~/infrastructure pull
+  sudo ansible-playbook ~/infrastructure/server/install.yml
+  sudo ansible-playbook ~/infrastructure/server/kubernetes.yml
+EOF

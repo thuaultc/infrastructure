@@ -21,6 +21,8 @@
     mode: 0440
     create: yes
     validate: 'visudo -cf %s'
+  become_user: root
+  become: true
 
 - name: Create user persistent data directory
   file:

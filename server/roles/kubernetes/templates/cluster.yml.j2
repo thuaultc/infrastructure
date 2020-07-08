@@ -2,8 +2,9 @@ nodes:
     - address: {{ server_ip }}
       user: kube
       role: ["controlplane", "worker", "etcd"]
+      ssh_key_path: ~/.ssh/id_rsa_kube
 ingress:
     provider: none
 network:
     plugin: calico
-
+addon_job_timeout: 100
