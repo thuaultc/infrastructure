@@ -12,9 +12,11 @@ accounts:
     name: kube
     shell: /bin/bash
     uid: 1000
-    clone:
-      - "github.com:thuaultc/infrastructure"
-      - "github.com:thuaultc/kubernetes"
+    repositories:
+      - host: github.com/thuaultc
+        repository: infrastructure
+      - host: github.com/thuaultc
+        repository: kubernetes
   users:
     - name: clement
       shell: /bin/zsh

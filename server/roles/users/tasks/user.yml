@@ -43,6 +43,9 @@
     size: 4096
     state: present
     force: no
+  become_user: "{{ user.name }}"
+  become: true
+
 
 - name: Set authorized keys for kube user
   authorized_key:

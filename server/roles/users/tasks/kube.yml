@@ -32,10 +32,9 @@
 
 - name: Clone git repositories
   git:
-    repo: "git@{{ item }}.git"
-    dest: /home/{{ user.name }}
+    repo: "https://{{ item.host }}/{{ item.repository }}.git"
+    dest: "/home/{{ user.name }}/{{ item.repository }}"
     version: master
-    key_file: /home/harry/.ssh/id_rsa
     update: no
   with_items: "{{ user.repositories }}"
   become_user: kube
