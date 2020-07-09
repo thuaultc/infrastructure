@@ -14,9 +14,11 @@ accounts:
     uid: 1000
     repositories:
       - host: github.com/thuaultc
-        repository: infrastructure
+        name: infrastructure
+        scripts: true
       - host: github.com/thuaultc
-        repository: kubernetes
+        name: kubernetes
+        scripts: false
   users:
     - name: clement
       shell: /bin/zsh

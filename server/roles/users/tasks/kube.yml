@@ -34,11 +34,12 @@
 
 - name: Clone git repositories
   git:
-    repo: "https://{{ item.host }}/{{ item.repository }}.git"
-    dest: "/home/{{ user.name }}/{{ item.repository }}"
+    repo: "https://{{ repo.host }}/{{ repo.name }}.git"
+    dest: "/home/{{ user.name }}/{{ repo.name }}"
     version: master
     update: no
   with_items: "{{ user.repositories }}"
+  loop_control:
+    loop_var: repo
   become_user: kube
   become: true
-

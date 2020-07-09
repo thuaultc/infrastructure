@@ -54,6 +54,26 @@
   authorized_key:
     user: "kube"
     state: present
-    key: "{{ item }}"
+    key: "{{ ssh_key_file }}"
   with_file:
     - "/home/{{ user.name }}/.ssh/id_rsa_kube.pub"
+  loop_control:
+    loop_var: ssh_key_file
+
+- name: Create scripts directory
+  file:
+    path: "/home/{{ user.name }}/midgard/"
+    state: directory
+    owner: "{{ user.uid }}"
+    group: "{{ user.uid }}"
+    mode: '0755'
+
+- name: Create scripts symlink
+  file:
+    src: "/home/kube/{{ repo.name }}/scripts"
+    dest: "/home/{{ user.name }}/midgard/{{ repo.name }}"
+    state: link
+  with_items: "{{ accounts.kube.repositories }}"
+  when: repo.scripts == true
+  loop_control:
+    loop_var: repo
