@@ -51,7 +51,7 @@
   file:
     path: /home/kube/secrets
     state: directory
-    mode:  '0664'
+    mode:  '0775'
     owner: kube
     group: users
 
