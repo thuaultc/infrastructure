@@ -51,7 +51,7 @@
   file:
     path: /home/kube/secrets
     state: directory
-    mode:  '0770'
+    mode:  '0664'
     owner: kube
     group: users
 
@@ -59,6 +59,6 @@
   template:
     src: templates/cluster.yml.j2
     dest: /home/kube/secrets/cluster.yml
-    mode:  '0770'
+    mode:  '0664'
     owner: kube
     group: users
