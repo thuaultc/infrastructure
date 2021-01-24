@@ -3,6 +3,7 @@ nodes:
       user: kube
       role: ["controlplane", "worker", "etcd"]
       ssh_key_path: ~/.ssh/id_rsa_kube
+kubernetes_version: {{ kubernetes.server_version }}
 ingress:
     provider: none
 network:

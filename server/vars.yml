@@ -29,7 +29,8 @@ accounts:
       uid: 3000
       github: satreix
 kubernetes:
-  kubectl_version: v1.18.3
-  helm_version: v3.2.1
-  rke_version: v1.0.8
+  server_version: v1.19.6-rancher1-1
+  kubectl_version: v1.19.6
+  helm_version: v3.5.0
+  rke_version: v1.2.4
 
